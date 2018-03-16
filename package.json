@@ -12,6 +12,7 @@
     "express": "^4.16.3",
     "klaw": "^2.1.1",
     "markdown-it": "^8.4.1",
+    "morgan": "^1.9.0",
     "music-metadata": "^0.9.8",
     "podcast": "^1.1.0"
   }
