@@ -15,3 +15,8 @@ listen:
 users:
   - username: podcast
     password: example-password
+
+# A string containing a regular expression suitable for passing to JavaScript's
+# `RegExp` constructor function which identifies the audio files to try to
+# include as podcasts. See also https://regex101.com/
+audioRegExp: (?:m4a|mp3)$
