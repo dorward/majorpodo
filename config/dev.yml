@@ -1,0 +1,17 @@
+# Directory to search for podcast audio files in
+path: /tmp/pods/
+
+# Base URL for RSS feeds 
+httpRoot: http://localhost:3000/
+
+# Where the HTTP server should listen for requests
+# Takes the options listed at: https://nodejs.org/api/net.html#net_server_listen_options_callback
+listen:
+  port: 3000
+  host: 0.0.0.0
+
+# Usernames and passwords
+# Omit entirely for a publicly accessible podcast service
+users:
+  - username: podcast
+    password: example-password

@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Available Podcasts</title>
+<h1>Available Podcasts</h1>
+<ul>
+    {% for show in shows %}
+    <li><a href="/{{show | urlencode}}">{{show}}</a> (<a href="/{{show | urlencode}}/rss">RSS</a>)</li>
+    {% endfor %}
+</ul>

@@ -1,0 +1,22 @@
+table,
+th,
+td {
+    vertical-align: top;
+    border: solid black 1px;
+    border-collapse: collapse;
+    padding: 1ex;
+}
+
+td.image,
+td.number {
+    text-align: center;
+}
+
+p {
+    margin: 0 0 1ex 0;
+}
+
+img {
+    max-width: 300px;
+    height: auto;
+}
