@@ -26,7 +26,7 @@ To run with the development configuration:
 
 ## Meta
 
-Your Name – [@dorward](https://twitter.com/dorward) – david@dorward.me.uk
+David Dorward – [@dorward](https://twitter.com/dorward) – david@dorward.me.uk
 
 Distributed under the [GNU General Public License version 2](https://opensource.org/licenses/GPL-2.0).
 
