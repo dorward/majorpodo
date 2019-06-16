@@ -1,6 +1,9 @@
 # Directory to search for podcast audio files in
 path: /tmp/pods/
 
+# Directory to store extracted images in
+imagePath: /tmp/pod-image/
+
 # Base URL for RSS feeds 
 httpRoot: http://localhost:3000/
 
@@ -43,3 +46,4 @@ filters:
       title: "Hitchhiker's Guide to the Galaxy"
     - expression: "How to Survive the Roman Empire, by Pliny and Me"
       title: "How to Survive the Roman Empire, by Pliny and Me"
+    
