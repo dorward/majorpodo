@@ -23,3 +23,23 @@ audioRegExp: (?:m4a|mp3)$
 
 # Path to write log files to
 logFile: /tmp/majorpodo.log
+
+# Third-party audio files can have information in the metadata which makes it
+# hard to group properly. This allows you to transform that data.
+# Note that YML requires slash characters to be escaped
+filters:
+  remove: 
+    # Regular expressions which match sections of album titles to be removed
+    # entirely.
+    - "[:-] Series \\d+(?: Omnibus)?$"
+    - ": Christmas Special(?: \\d+)?$"
+    - "\\(Omnibus\\)$"
+  replace:
+    # Regular expressions and plain strings to replace any title that is a match
+    # for them with. This is used to normalise variations in title (e.g. should
+    # a show sometimes end a title in a question mark and sometimes omit it, or
+    # to give each season a subtitle (like Hexagonal Phase)).
+    - expression: "Hitchhiker's Guide to the Galaxy"
+      title: "Hitchhiker's Guide to the Galaxy"
+    - expression: "How to Survive the Roman Empire, by Pliny and Me"
+      title: "How to Survive the Roman Empire, by Pliny and Me"
