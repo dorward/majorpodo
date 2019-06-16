@@ -28,7 +28,7 @@ To run with the development configuration:
 
 Your Name – [@dorward](https://twitter.com/dorward) – david@dorward.me.uk
 
-Distributed under the XYZ license. See ``LICENSE`` for more information.
+Distributed under the [GNU General Public License version 2](https://opensource.org/licenses/GPL-2.0).
 
 [https://github.com/dorward/](https://github.com/dorward/)
 
