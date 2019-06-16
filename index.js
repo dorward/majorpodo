@@ -3,7 +3,7 @@ const express = require("express");
 const basicAuth = require("express-basic-auth");
 const serveStatic = require("serve-static");
 const nunjucks = require("nunjucks");
-const { httplogger } = require("./lib/log");
+const { httplogger, logger } = require("./lib/log");
 const { listShows, aboutShow, aboutShowRSS, serveDebugData } = require("./lib/routes");
 const path = config.get("path");
 const users = config.get("users").reduce( (accumulator, currentValue) => {
@@ -29,4 +29,4 @@ app.get("/json", serveDebugData);
 app.use("/audio", serveStatic(path));
 app.use("/static", serveStatic("static"));
 
-app.listen(config.get("listen"), () => process.stdout.write("Majorpodo server now listening\n") );
+app.listen(config.get("listen"), () => logger.log({level: "info", message: "Majorpodo server now listening" }) );
