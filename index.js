@@ -1,6 +1,5 @@
 const config = require("config");
 const express = require("express");
-const basicAuth = require("express-basic-auth");
 const serveStatic = require("serve-static");
 const nunjucks = require("nunjucks");
 const { httplogger, logger } = require("./lib/log");
@@ -8,22 +7,15 @@ const { httplogger, logger } = require("./lib/log");
 const { listShows, aboutShow, aboutShowRSS, serveDebugData } = require("./lib/routes");
 const path = config.get("path");
 const imagePath = config.get("imagePath");
-const users = config.get("users").reduce( (accumulator, currentValue) => {
-    accumulator[currentValue.username] = currentValue.password;
-    return accumulator;
-}, {} );
+const auth = require("./lib/auth");
 
 nunjucks.configure("views", { autoescape: true });
 
 const app = express();
 
 app.use(httplogger);
-if (users.length) {
-    app.use(basicAuth({
-        users,
-        challenge: true,
-        realm: "majorpodo",
-    }));
+if (auth) {
+    app.use(auth);
 }
 
 app.get("/", listShows);
