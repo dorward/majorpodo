@@ -20,3 +20,6 @@ users:
 # `RegExp` constructor function which identifies the audio files to try to
 # include as podcasts. See also https://regex101.com/
 audioRegExp: (?:m4a|mp3)$
+
+# Path to write log files to
+logFile: /tmp/majorpodo.log

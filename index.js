@@ -1,12 +1,11 @@
 const config = require("config");
 const podcast = require("podcast");
 const express = require("express");
-const morgan = require("morgan");
 const basicAuth = require("express-basic-auth");
 const serveStatic = require("serve-static");
 const nunjucks = require("nunjucks");
-const { getAudioFiles, getMetaDataFactory, filterMetaDataFactory, groupByAlbum, removeEpisodesWithMissingMetaData } = require("./lib/audio_search.js");
-
+const { getAudioFiles, getMetaDataFactory, filterMetaDataFactory, groupByAlbum, removeEpisodesWithMissingMetaData } = require("./lib/audio_search");
+const {logger, httplogger} = require("./lib/log");
 const path = config.get("path");
 const http_path = config.get("httpRoot");
 const users = config.get("users").reduce( (accumulator, currentValue) => {
@@ -21,7 +20,7 @@ setInterval(() => showindex = updateShowIndex(), 60000 * 90); // Refresh every 9
 nunjucks.configure("views", { autoescape: true });
 
 const app = express();
-app.use(morgan("tiny")); // Request logger middleware
+app.use(httplogger);
 if (users.length) {
     app.use(basicAuth({
         users,
@@ -42,7 +41,10 @@ function listShows(req, res) {
     try {
         showindex.then(generateShowList);
     } catch (error) {
-        console.log("Error trying to use showindex which should be a promise", { showindex, error });
+        logger.log({ 
+            level: "error", 
+            message: "Error trying to use showindex which should be a promise: " + JSON.stringify({ showindex, error })
+        });
     }
     
     function generateShowList(data) {
@@ -55,7 +57,11 @@ function aboutShow(req, res) {
     try {
         showindex.then(generateShowInfo);
     } catch (error) {
-        console.log("Error trying to use showindex which should be a promise", { showindex, error });
+        logger.log({ 
+            level: "error", 
+            message: "Error trying to use showindex which should be a promise: " + JSON.stringify({ showindex, error })
+        });
+
     }
 
     function generateShowInfo(data) {
@@ -73,7 +79,10 @@ function aboutShowRSS(req, res) {
     try {
         showindex.then(generateShowRSS);
     } catch (error) {
-        console.log("Error trying to use showindex which should be a promise", { showindex, error });
+        logger.log({ 
+            level: "error", 
+            message: "Error trying to use showindex which should be a promise: " + JSON.stringify({ showindex, error })
+        });
     }
 
     function generateShowRSS(data) {
