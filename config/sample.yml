@@ -4,20 +4,20 @@ path: /tmp/pods/
 # Directory to store extracted images in
 imagePath: /tmp/pod-image/
 
-# Base URL for RSS feeds 
+# Base URL for RSS feeds
 httpRoot: http://localhost:3000/
 
 # Where the HTTP server should listen for requests
 # Takes the options listed at: https://nodejs.org/api/net.html#net_server_listen_options_callback
 listen:
   port: 3000
-  host: 0.0.0.0
+  host: 127.0.0.1 # 0.0.0.0 will listen on all network interfaces
 
 # Usernames and passwords
-# Omit entirely for a publicly accessible podcast service
-users:
-  - username: podcast
-    password: example-password
+# Leave commented out for a publicly accessible podcast service or if you are handling authentication elsewhere
+# users:
+#   - username: podcast
+#     password: example-password
 
 # A string containing a regular expression suitable for passing to JavaScript's
 # `RegExp` constructor function which identifies the audio files to try to
@@ -25,13 +25,16 @@ users:
 audioRegExp: (?:m4a|mp3)$
 
 # Path to write log files to
-logFile: /tmp/majorpodo.log
+# Majorpodo also logs to STDOUT, leave this commented out if that is sufficient.
+# e.g. if you are using pm2 to manage the log files
+#
+# logFile: /tmp/majorpodo.log
 
 # Third-party audio files can have information in the metadata which makes it
 # hard to group properly. This allows you to transform that data.
 # Note that YML requires slash characters to be escaped
 filters:
-  remove: 
+  remove:
     # Regular expressions which match sections of album titles to be removed
     # entirely.
     - "[:-] Series \\d+(?: Omnibus)?$"
@@ -44,6 +47,5 @@ filters:
     # to give each season a subtitle (like Hexagonal Phase)).
     - expression: "Hitchhiker's Guide to the Galaxy"
       title: "Hitchhiker's Guide to the Galaxy"
-    - expression: "How to Survive the Roman Empire, by Pliny and Me"
-      title: "How to Survive the Roman Empire, by Pliny and Me"
-    
+    - expression: 'How to Survive the Roman Empire, by Pliny and Me'
+      title: 'How to Survive the Roman Empire, by Pliny and Me'
