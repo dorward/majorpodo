@@ -1,3 +1,5 @@
 /node_modules
 *.bak
 /config/default.yml
+/test_data
+/tmp
