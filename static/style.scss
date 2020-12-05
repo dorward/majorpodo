@@ -79,10 +79,9 @@ ul.episodes {
 		max-width: 30em;
 		display: flex;
 		flex-direction: column;
-		img {
-			width: 100%;
-		}
+
 		.head {
+			order: 1;
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
@@ -91,11 +90,17 @@ ul.episodes {
 			color: $colorDark;
 		}
 		.title {
+			order: 2;
 			font-family: $headlineFont;
 			font-size: 1.5rem;
 			flex: 1 0 auto;
 			color: $colorShadow;
 			padding: 0.5rem;
+		}
+
+		img {
+			order: 3;
+			width: 100%;
 		}
 	}
 }

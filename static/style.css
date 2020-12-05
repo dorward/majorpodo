@@ -70,10 +70,8 @@ ul.episodes > li {
   display: flex;
   flex-direction: column;
 }
-ul.episodes > li img {
-  width: 100%;
-}
 ul.episodes > li .head {
+  order: 1;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -82,11 +80,16 @@ ul.episodes > li .head {
   color: #2c3531;
 }
 ul.episodes > li .title {
+  order: 2;
   font-family: "Comfortaa", cursive;
   font-size: 1.5rem;
   flex: 1 0 auto;
   color: #d9b08c;
   padding: 0.5rem;
+}
+ul.episodes > li img {
+  order: 3;
+  width: 100%;
 }
 
 /*# sourceMappingURL=style.css.map */
