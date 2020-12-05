@@ -8,7 +8,6 @@ const { listShows, aboutShow, aboutShowRSS, serveDebugData, titleHomepage, episo
 const path = config.get('path');
 const imagePath = config.get('imagePath');
 const auth = require('./lib/auth');
-const database = require('./lib/database');
 
 nunjucks.configure('views', { autoescape: true });
 
