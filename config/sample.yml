@@ -4,6 +4,9 @@ path: /tmp/pods/
 # Directory to store extracted images in
 imagePath: /tmp/pod-image/
 
+# Directory to store the database in (Majorpodo uses this to cache information scraped from media files)
+databasePath: /tmp/pod-database/
+
 # Base URL for RSS feeds
 httpRoot: http://localhost:3000/
 
