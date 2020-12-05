@@ -3,6 +3,13 @@
 	{% for data in shows %} {% set show = data[0] %} {% set episodes = data[1] %}
 	<li>
 		<h2 class="title">
+			<div class="icon">
+				{% if episodes[0].metadata.video %}
+				<img src="/static/video.svg" height="20" width="20" alt="Video: " />
+				{% else %}
+				<img src="/static/audio.svg" height="20" width="20" alt="Audio: " />
+				{% endif %}
+			</div>
 			<a href="/title/{{show | urlencode}}">{{show}}</a>
 		</h2>
 

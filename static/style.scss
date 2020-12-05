@@ -54,6 +54,17 @@ table img {
 
 /*********/
 
+.icon {
+	background: $colorLight;
+	display: inline-block;
+	width: 1em;
+	height: 1em;
+	min-width: 25px;
+	min-height: 25px;
+	vertical-align: middle;
+	text-align: center;
+}
+
 .head {
 	display: flex;
 	justify-content: space-between;
