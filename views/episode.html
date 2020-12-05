@@ -1,0 +1,24 @@
+{% extends "base.html" %} {% set page_title = title + ": " + episode.metadata.common.title %} {% block content %}
+
+<div class="head">
+	<p class="position">Season {{episode.metadata.common.disk.no}} Episode {{episode.metadata.common.track.no}}</p>
+	<audio controls src="{{episode.url}}"></audio>
+	<div>
+		<a href="../"><img src="/static/previous.svg" alt="Back to series" height="20" width="20" /></a>
+
+		<a href="{{episode.url}}" download
+			><img src="/static/download.svg" alt="Download {{episode.metadata.common.title}}" height="20" width="20"
+		/></a>
+	</div>
+</div>
+
+<div class="description">{{episode.metadata.description | safe}}</div>
+
+{% if episode.image %}<img src="{{episode.image}}" />{% endif %} {% endblock %}
+<!--
+	<p class="position">Season {{episode.metadata.common.disk.no}} Episode {{episode.metadata.common.track.no}}</p>
+	<h2>{{episode.title}}</h2>
+	{% if episode.image %}<img src="{{episode.image}}" />{% endif %}
+	<div><a href="{{episode.url}}">Download</a></div>
+	
+-->

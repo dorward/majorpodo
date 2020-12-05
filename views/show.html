@@ -1,25 +1,27 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
+<meta charset="utf-8" />
 <title>Podcast: {{title}}</title>
-<link rel="stylesheet" href="/static/style.css">
+<link rel="stylesheet" href="/static/style.css" />
 <h1>Podcast: {{title}}</h1>
 <p>(<a href="/{{title | urlencode}}/rss">RSS</a>)</p>
 <table>
-    <tr>
-        <td></td>
-        <th>Title</th>
-        <th>Series</th>
-        <th>Episode</th>
-        <th>Description</th>
+	<tr>
+		<td></td>
+		<th>Title</th>
+		<th>Series</th>
+		<th>Episode</th>
+		<th>Description</th>
 
-        {% for episode in show %}
-        <tr>
-            <td class="image">{% if episode.image %}<img src="{{episode.image}}">{% endif %}</td>
-            <td><a href="{{episode.url}}">{{episode.title}}</a></td>
-            <td class="number">{{episode.metadata.common.disk.no}}</td>
-            <td class="number">{{episode.metadata.common.track.no}}</td>
-            <td>{{episode.metadata.description | safe}}</td>
-            <!--{{episode | dump}}-->
-        </tr>
-        {% endfor %}
+		{% for episode in show %}
+	</tr>
+
+	<tr>
+		<td class="image">{% if episode.image %}<img src="{{episode.image}}" />{% endif %}</td>
+		<td><a href="{{episode.url}}">{{episode.title}}</a></td>
+		<td class="number">{{episode.metadata.common.disk.no}}</td>
+		<td class="number">{{episode.metadata.common.track.no}}</td>
+		<td>{{episode.metadata.description | safe}}</td>
+		<!--{{episode | dump}}-->
+	</tr>
+	{% endfor %}
 </table>

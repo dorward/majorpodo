@@ -1,0 +1,31 @@
+{% extends "base.html" %} {% set page_title = title + " Podcast" %} {% set rss = true %} {% block content %}
+<ul class="episodes">
+	{% for episode in show %}
+	<li>
+		<h2 class="title">
+			<a href="/title/{{title | urlencode }}/episode/{{ episode.filename | urlencode }}"
+				>{{episode.metadata.common.title}}</a
+			>
+		</h2>
+
+		<div class="head">
+			<p class="position">Season {{episode.metadata.common.disk.no}} Episode {{episode.metadata.common.track.no}}</p>
+			<div>
+				<a href="{{episode.url}}" download
+					><img src="/static/download.svg" alt="Download {{episode.metadata.common.title}}" height="20" width="20"
+				/></a>
+			</div>
+		</div>
+
+		{% if episode.image %}<img src="{{episode.image}}" />{% endif %}
+	</li>
+	{% endfor %}
+</ul>
+{% endblock %}
+<!--
+	<p class="position">Season {{episode.metadata.common.disk.no}} Episode {{episode.metadata.common.track.no}}</p>
+	<h2>{{episode.title}}</h2>
+	{% if episode.image %}<img src="{{episode.image}}" />{% endif %}
+	<div><a href="{{episode.url}}">Download</a></div>
+	{{episode.metadata.description | safe}}
+-->

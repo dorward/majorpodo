@@ -1,0 +1,138 @@
+/* Global */
+$colorDark: #2c3531;
+$colorContrast: #116466;
+$colorShadow: #d9b08c;
+$colorHighlight: #ffcb9a;
+$colorLight: #d1e8e2;
+
+$headlineFont: 'Comfortaa', cursive;
+
+body {
+	background: black;
+	color: white;
+	font-family: 'Raleway', sans-serif;
+	margin: 0;
+	padding: 0;
+}
+
+img {
+	max-width: 100%;
+}
+
+h1 {
+	font-size: 2.5rem;
+	color: $colorShadow;
+	font-family: $headlineFont;
+}
+
+p {
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 45em;
+}
+
+/*******/
+
+table,
+th,
+td {
+	vertical-align: top;
+	border: solid black 1px;
+	border-collapse: collapse;
+	padding: 1ex;
+}
+
+td.image,
+td.number {
+	text-align: center;
+}
+
+table img {
+	max-width: 300px;
+	height: auto;
+}
+
+/*********/
+
+.head {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0.5rem;
+	background: $colorShadow;
+	color: $colorDark;
+	> * {
+		flex: 1 1 33%;
+	}
+	> div {
+		text-align: right;
+	}
+	@media (max-width: 800px) {
+		flex-direction: column;
+		> * {
+			flex: 1 1 auto;
+			margin: 0.5rem;
+		}
+	}
+}
+
+/* Series listing pages */
+
+header {
+	margin: 0.5rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+ul.episodes {
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: stretch;
+	list-style: none;
+	* {
+		box-sizing: border-box;
+	}
+	> li {
+		border: solid $colorShadow 1px;
+		margin: 0.5rem;
+		padding: 0;
+		flex: 1 1 20em;
+		width: 20em;
+		max-width: 30em;
+		display: flex;
+		flex-direction: column;
+		.head {
+			order: 1;
+		}
+		.title {
+			order: 2;
+			font-family: $headlineFont;
+			font-size: 1.5rem;
+			flex: 1 0 auto;
+			color: $colorShadow;
+			padding: 0.5rem;
+			a {
+				color: inherit;
+				text-decoration: none;
+				&:hover {
+					text-decoration: underline;
+				}
+			}
+		}
+
+		> img {
+			order: 3;
+			width: 100%;
+		}
+	}
+}
+
+/* Episode pages */
+
+.description {
+	padding: 0.5rem;
+}
