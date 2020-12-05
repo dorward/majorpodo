@@ -1,32 +1,41 @@
 <!DOCTYPE html>
 <meta charset="utf-8" />
 <title>Podcast: {{title}}</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" />
+<link
+	href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&family=Raleway:wght@300&display=swap"
+	rel="stylesheet"
+/>
+
 <link rel="stylesheet" href="/static/style.css" />
-<h1>{{title}} Podcast</h1>
-<p>(<a href="/{{title | urlencode}}/rss">RSS</a>)</p>
+<header>
+	<h1>{{title}} Podcast</h1>
 
-<style>
-	article {
-		padding: 1em;
-		margin: 1em;
-		border: solid black 1px;
-	}
+	<div class="rss">
+		<a href="/{{title | urlencode}}/rss" alt="RSS">
+			<img src="/static/rss.svg" height="50" width="50" />
+		</a>
+	</div>
+</header>
 
-	.position {
-		background: rgba(100, 100, 100, 0.5);
-	}
+<ul class="episodes">
+	{% for episode in show %}
+	<li>
+		<div class="head">
+			<p class="position">Season {{episode.metadata.common.disk.no}} Episode {{episode.metadata.common.track.no}}</p>
+			<a href="{{episode.url}}"><img src="/static/download.svg" height="20" width="20" /></a>
+		</div>
 
-	h2 {
-		border-bottom: solid black 1px;
-	}
-</style>
+		<p class="title">{{episode.metadata.common.title}}</p>
+		{% if episode.image %}<img src="{{episode.image}}" />{% endif %}
+	</li>
+	{% endfor %}
+</ul>
 
-{% for episode in show %}
-<article>
+<!--
 	<p class="position">Season {{episode.metadata.common.disk.no}} Episode {{episode.metadata.common.track.no}}</p>
 	<h2>{{episode.title}}</h2>
 	{% if episode.image %}<img src="{{episode.image}}" />{% endif %}
 	<div><a href="{{episode.url}}">Download</a></div>
 	{{episode.metadata.description | safe}}
-</article>
-{% endfor %}
+-->

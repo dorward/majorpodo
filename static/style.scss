@@ -1,0 +1,101 @@
+/* Global */
+$colorDark: #2c3531;
+$colorContrast: #116466;
+$colorShadow: #d9b08c;
+$colorHighlight: #ffcb9a;
+$colorLight: #d1e8e2;
+
+$headlineFont: 'Comfortaa', cursive;
+
+body {
+	background: black;
+	color: white;
+	font-family: 'Raleway', sans-serif;
+}
+
+img {
+	max-width: 100%;
+}
+
+h1 {
+	font-size: 2.5rem;
+	color: $colorShadow;
+	font-family: $headlineFont;
+}
+
+/*******/
+
+table,
+th,
+td {
+	vertical-align: top;
+	border: solid black 1px;
+	border-collapse: collapse;
+	padding: 1ex;
+}
+
+td.image,
+td.number {
+	text-align: center;
+}
+
+p {
+	margin: 0 0 1ex 0;
+}
+
+table img {
+	max-width: 300px;
+	height: auto;
+}
+
+/*********/
+
+/* Series listing pages */
+
+header {
+	margin: 0.5rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+ul.episodes {
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: stretch;
+	list-style: none;
+	* {
+		box-sizing: border-box;
+	}
+	> li {
+		border: solid $colorShadow 1px;
+		margin: 0.5rem;
+		padding: 0;
+		flex: 1 1 20em;
+		width: 20em;
+		max-width: 30em;
+		display: flex;
+		flex-direction: column;
+		img {
+			width: 100%;
+		}
+		.head {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 0.5rem;
+			background: $colorShadow;
+			color: $colorDark;
+		}
+		.title {
+			font-family: $headlineFont;
+			font-size: 1.5rem;
+			flex: 1 0 auto;
+			color: $colorShadow;
+			padding: 0.5rem;
+		}
+	}
+}
