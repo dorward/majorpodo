@@ -22,5 +22,9 @@
     "podcast": "^1.1.0",
     "winston": "^3.2.1"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "eslint": "^7.15.0",
+    "eslint-config-prettier": "^6.15.0",
+    "prettier": "^2.2.1"
+  }
 }
