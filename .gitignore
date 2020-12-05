@@ -3,3 +3,4 @@
 /config/default.yml
 /test_data
 /tmp
+.DS_Store

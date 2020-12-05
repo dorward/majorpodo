@@ -44,6 +44,28 @@ table img {
 }
 
 /*********/
+.icon {
+  background: transparent;
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  min-width: 25px;
+  min-height: 25px;
+  vertical-align: middle;
+  text-align: center;
+}
+.icon.prefix {
+  margin-right: 0.5rem;
+}
+.icon svg {
+  height: 25px;
+  width: 25px;
+}
+.icon path {
+  stroke: #d9b08c;
+  fill: #d9b08c;
+}
+
 .head {
   display: flex;
   justify-content: space-between;
@@ -51,6 +73,16 @@ table img {
   padding: 0.5rem;
   background: #d9b08c;
   color: #2c3531;
+}
+.head .icon svg,
+.head .icon path:first-child {
+  fill: #d9b08c;
+  stroke: #d9b08c;
+}
+.head .icon path,
+.head .icon circle {
+  stroke: black;
+  fill: black;
 }
 .head > * {
   flex: 1 1 33%;
@@ -108,6 +140,9 @@ ul.episodes > li .title {
   flex: 1 0 auto;
   color: #d9b08c;
   padding: 0.5rem;
+}
+ul.episodes > li .title > * {
+  flex: 0 0 auto;
 }
 ul.episodes > li .title a {
   color: inherit;
