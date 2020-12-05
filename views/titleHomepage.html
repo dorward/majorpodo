@@ -1,23 +1,4 @@
-<!DOCTYPE html>
-<meta charset="utf-8" />
-<title>Podcast: {{title}}</title>
-<link rel="preconnect" href="https://fonts.gstatic.com" />
-<link
-	href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&family=Raleway:wght@300&display=swap"
-	rel="stylesheet"
-/>
-
-<link rel="stylesheet" href="/static/style.css" />
-<header>
-	<h1>{{title}} Podcast</h1>
-
-	<div class="rss">
-		<a href="/{{title | urlencode}}/rss" alt="RSS">
-			<img src="/static/rss.svg" height="50" width="50" />
-		</a>
-	</div>
-</header>
-
+{% extends "base.html" %} {% set page_title = title + " Podcast" %} {% block content %}
 <ul class="episodes">
 	{% for episode in show %}
 	<li>
@@ -32,7 +13,7 @@
 	</li>
 	{% endfor %}
 </ul>
-
+{% endblock %}
 <!--
 	<p class="position">Season {{episode.metadata.common.disk.no}} Episode {{episode.metadata.common.track.no}}</p>
 	<h2>{{episode.title}}</h2>
