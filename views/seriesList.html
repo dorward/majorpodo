@@ -1,0 +1,29 @@
+{% extends "base.html" %} {% set page_title = "Majorpodo" %} {% block content %}
+<ul class="episodes">
+	{% for data in shows %} {% set show = data[0] %} {% set episodes = data[1] %}
+	<li>
+		<h2 class="title">
+			<a href="/title/{{show | urlencode}}">{{show}}</a>
+		</h2>
+
+		<div class="head">
+			<p class="position">{{episodes.length}} episodes</p>
+			<div>
+				<a href="/{{show | urlencode}}/rss"
+					><img alt="RSS feed for {{title}}" src="/static/rss.svg" height="20" width="20"
+				/></a>
+			</div>
+		</div>
+
+		{% if episodes[0].image %}<img src="{{episodes[0].image}}" />{% endif %}
+	</li>
+	{% endfor %}
+</ul>
+{% endblock %}
+<!--
+	<p class="position">Season {{episode.metadata.common.disk.no}} Episode {{episode.metadata.common.track.no}}</p>
+	<h2>{{episode.title}}</h2>
+	{% if episode.image %}<img src="{{episode.image}}" />{% endif %}
+	<div><a href="{{episode.url}}">Download</a></div>
+	{{episode.metadata.description | safe}}
+-->
