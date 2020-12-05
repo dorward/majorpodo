@@ -11,6 +11,8 @@ body {
 	background: black;
 	color: white;
 	font-family: 'Raleway', sans-serif;
+	margin: 0;
+	padding: 0;
 }
 
 img {
@@ -21,6 +23,12 @@ h1 {
 	font-size: 2.5rem;
 	color: $colorShadow;
 	font-family: $headlineFont;
+}
+
+p {
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 45em;
 }
 
 /*******/
@@ -39,16 +47,34 @@ td.number {
 	text-align: center;
 }
 
-p {
-	margin: 0 0 1ex 0;
-}
-
 table img {
 	max-width: 300px;
 	height: auto;
 }
 
 /*********/
+
+.head {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0.5rem;
+	background: $colorShadow;
+	color: $colorDark;
+	> * {
+		flex: 1 1 33%;
+	}
+	> div {
+		text-align: right;
+	}
+	@media (max-width: 800px) {
+		flex-direction: column;
+		> * {
+			flex: 1 1 auto;
+			margin: 0.5rem;
+		}
+	}
+}
 
 /* Series listing pages */
 
@@ -79,15 +105,8 @@ ul.episodes {
 		max-width: 30em;
 		display: flex;
 		flex-direction: column;
-
 		.head {
 			order: 1;
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			padding: 0.5rem;
-			background: $colorShadow;
-			color: $colorDark;
 		}
 		.title {
 			order: 2;
@@ -96,11 +115,24 @@ ul.episodes {
 			flex: 1 0 auto;
 			color: $colorShadow;
 			padding: 0.5rem;
+			a {
+				color: inherit;
+				text-decoration: none;
+				&:hover {
+					text-decoration: underline;
+				}
+			}
 		}
 
-		img {
+		> img {
 			order: 3;
 			width: 100%;
 		}
 	}
+}
+
+/* Episode pages */
+
+.description {
+	padding: 0.5rem;
 }
