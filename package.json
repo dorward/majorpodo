@@ -1,6 +1,6 @@
 {
   "name": "podcast_get_iplayer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Scans MP3 files downloaded by get_iplayer and turns them into a podcast feed",
   "main": "index.js",
   "scripts": {
