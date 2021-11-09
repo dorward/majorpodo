@@ -4,7 +4,15 @@ const serveStatic = require('serve-static');
 const nunjucks = require('nunjucks');
 const { httplogger, logger } = require('./lib/log');
 // eslint-disable-next-line no-unused-vars
-const { listShows, aboutShow, aboutShowRSS, serveDebugData, titleHomepage, episodePage } = require('./lib/routes');
+const {
+	listShows,
+	aboutShow,
+	aboutShowRSS,
+	serveDebugData,
+	titleHomepage,
+	episodePage,
+	refreshNow,
+} = require('./lib/routes');
 const path = config.get('path');
 const imagePath = config.get('imagePath');
 const auth = require('./lib/auth');
@@ -23,6 +31,7 @@ app.get('/', listShows);
 app.use('/audio', serveStatic(path));
 app.use('/static', serveStatic('static'));
 app.use('/images', serveStatic(imagePath));
+app.get('/__refresh', refreshNow);
 app.get('/:show', aboutShow);
 app.get('/:show/rss', aboutShowRSS);
 app.get('/title/:title', titleHomepage);
