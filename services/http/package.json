@@ -1,0 +1,51 @@
+{
+    "name": "@majorpodo/http",
+    "version": "2.0.0",
+    "private": true,
+    "description": "Podcast server",
+    "license": "GPL-2.0-only",
+    "author": "David Dorward <david@dorward.me.uk>",
+    "files": [
+        "build",
+        "views",
+        "static",
+        "LICENSE"
+    ],
+    "scripts": {
+        "start:dev": "nodemon index.ts",
+        "clean": "node -e \"require('node:fs').rmSync('build', { recursive: true, force: true })\"",
+        "copy-files": "node -e \"require('node:fs').cpSync('views', 'build/views', { recursive: true })\"",
+        "build": "pnpm run clean && tsc && pnpm run copy-files",
+        "lint": "oxlint --deny-warnings .",
+        "format:check": "oxfmt --check .",
+        "format:fix": "oxfmt --write .",
+        "lint:fix": "oxlint --fix --deny-warnings .",
+        "typecheck": "tsc --noEmit && tsc -p tsconfig.test.json",
+        "test": "vitest run --root ../.."
+    },
+    "dependencies": {
+        "@majorpodo/configuration": "workspace:*",
+        "express": "^5.3.0",
+        "express-winston": "^4.2.0",
+        "nunjucks": "^3.2.4",
+        "pg": "^8.23.1",
+        "podcast": "^2.0.1",
+        "winston": "^3.19.0"
+    },
+    "devDependencies": {
+        "@types/express": "^5.0.6",
+        "@types/node": "^24.19.2",
+        "@types/nunjucks": "^3.2.6",
+        "@types/pg": "^8.23.1",
+        "@types/supertest": "^7.2.1",
+        "nodemon": "^3.1.14",
+        "oxfmt": "^0.74.0",
+        "oxlint": "^1.89.0",
+        "supertest": "^7.3.1",
+        "ts-node": "^10.9.2",
+        "typescript": "~5.9.3"
+    },
+    "engines": {
+        "node": ">=24"
+    }
+}

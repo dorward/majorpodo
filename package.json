@@ -1,30 +1,32 @@
 {
-  "name": "podcast_get_iplayer",
-  "version": "1.0.1",
-  "description": "Scans MP3 files downloaded by get_iplayer and turns them into a podcast feed",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "GPL-2.0-only",
-  "dependencies": {
-    "config": "^3.1.0",
-    "express": "^4.17.1",
-    "express-basic-auth": "^1.2.0",
-    "js-yaml": "^3.13.1",
-    "klaw": "^2.1.1",
-    "markdown-it": "^8.4.2",
-    "morgan": "^1.9.1",
-    "music-metadata": "^0.9.15",
-    "node-persist": "^3.1.0",
-    "nunjucks": "^3.2.2",
-    "podcast": "^1.1.0",
-    "winston": "^3.2.1"
-  },
-  "devDependencies": {
-    "eslint": "^7.15.0",
-    "eslint-config-prettier": "^6.15.0",
-    "prettier": "^2.2.1"
-  }
+    "name": "majorpodo-project",
+    "version": "2.0.0",
+    "private": true,
+    "license": "GPL-2.0-only",
+    "scripts": {
+        "build": "pnpm -r run build",
+        "typecheck": "pnpm -r run typecheck",
+        "lint": "pnpm -r run lint && oxlint -c services/http/.oxlintrc.json --deny-warnings tests vitest.config.mts && oxlint -c services/http/.oxlintrc.json --deny-warnings scripts",
+        "lint:fix": "pnpm -r run lint:fix && oxlint -c services/http/.oxlintrc.json --fix --deny-warnings tests vitest.config.mts && oxlint -c services/http/.oxlintrc.json --fix --deny-warnings scripts",
+        "format:check": "pnpm -r run format:check && oxfmt -c services/http/.oxfmtrc.json --check tests vitest.config.mts package.json configuration scripts .github renovate.json",
+        "format:fix": "pnpm -r run format:fix && oxfmt -c services/http/.oxfmtrc.json --write tests vitest.config.mts package.json configuration scripts .github renovate.json",
+        "test": "pnpm --filter @majorpodo/configuration build && vitest run",
+        "test:watch": "pnpm --filter @majorpodo/configuration build && vitest",
+        "package": "node scripts/package.mjs",
+        "test:docker": "node scripts/docker-smoke.mjs",
+        "test:package": "node scripts/test-package.mjs",
+        "configure:github": "node scripts/configure-github.mjs"
+    },
+    "devDependencies": {
+        "@electric-sql/pglite": "^0.5.11",
+        "js-yaml": "^5.5.0",
+        "oxfmt": "^0.74.0",
+        "oxlint": "^1.89.0",
+        "vitest": "^5.0.5"
+    },
+    "engines": {
+        "node": ">=24",
+        "pnpm": "12.14.0"
+    },
+    "packageManager": "pnpm@12.14.0"
 }

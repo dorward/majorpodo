@@ -1,0 +1,20 @@
+.git
+**/node_modules
+**/build
+edited
+postgresdata
+.pnpm-store
+*.zip
+*.bak
+.DS_Store
+
+# Runtime configuration is mounted, never baked into service images.
+configuration
+
+# Host deployment settings and PostgreSQL data are not image build inputs.
+.env
+data/postgresql
+
+# Deployment archives
+dist/
+.majorpodo-package-*/

@@ -1,0 +1,51 @@
+# Host-only Compose setting. Relative paths resolve from the project directory.
+# Use a new empty directory for the first deployment, then keep it stable.
+deployment:
+    postgresDataDirectory: ./data/postgresql
+
+# Public origin used for RSS links (no path, query, or fragment).
+publicUrl: https://majorpodo.example.com
+listen:
+    host: 0.0.0.0
+    port: 3000
+# Paths inside the service containers; match these to Docker volume targets.
+paths:
+    media: /var/media/get_iplayer/
+    images: /var/media/images/
+database:
+    host: majorpodo-postgres
+    port: 5432
+    databaseFile: postgres-database
+    userFile: postgres-user
+    passwordFile: postgres-password
+# Authenticated startup checks; per-attempt connection and query timeouts.
+databaseStartup:
+    attempts: 30
+    intervalMs: 1000
+    timeoutMs: 2000
+# Strings passed to RegExp; file names are matched case-sensitively.
+media:
+    pattern: '(m4a|mp3|mp4)$'
+    videoPattern: 'mp4$'
+
+# Third-party audio files can have information in the metadata which makes it
+# hard to group properly. This allows you to transform that data.
+# Escape backslashes in double-quoted YAML strings, or use single quotes.
+filters:
+    remove:
+        # Regular expressions which match sections of album titles to be removed
+        # entirely.
+        - "[:-] Series \\d+(?: Omnibus)?$"
+        - ": Christmas Special(?: \\d+)?$"
+        - "\\(Omnibus\\)$"
+    replace:
+        # Regular expressions and plain strings to replace any title that is a match
+        # for them with. This is used to normalise variations in title (e.g. should
+        # a show sometimes end a title in a question mark and sometimes omit it, or
+        # to give each season a subtitle (like Hexagonal Phase)).
+        - expression: "Hitchhiker's Guide to the Galaxy"
+          title: "Hitchhiker's Guide to the Galaxy"
+        - expression: 'How to Survive the Roman Empire, by Pliny and Me'
+          title: 'How to Survive the Roman Empire, by Pliny and Me'
+        - expression: 'Paul Scott - The Raj Quartet'
+          title: 'The Raj Quartet'

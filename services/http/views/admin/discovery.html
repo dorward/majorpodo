@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% set page_title = "Media discovery" %}
+{% block content %}
+<p><a href="/_admin/">Administration</a></p>
+<p>Times are UTC. Discovery is the first observation since tracking was enabled.
+Rules describe the latest successful import or refresh, using the rules as they existed then.
+Removed files remain in this report. Files that failed import are included.</p>
+{% for record in records %}
+<article>
+    <h2>{{record.file_path}}</h2>
+    <dl>
+        <dt>First discovered</dt><dd><time datetime="{{record.discovered}}">{{record.discovered}}</time></dd>
+        <dt>Last successful import or refresh</dt><dd>{{record.processed or "Not yet imported"}}</dd>
+        <dt>Original album title</dt><dd>{{record.original_title or "No recorded album title"}}</dd>
+        <dt>Resulting series</dt><dd>{{record.series_title or "Not yet determined"}}</dd>
+        <dt>Catalogue</dt><dd>{% if record.episode_id %}Episode {{record.episode_id}}{% else %}No current episode{% endif %}</dd>
+    </dl>
+    {% if record.last_error %}<p>Latest import error: {{record.last_error}}</p>{% endif %}
+    {% if record.alias_rules === null %}
+    <p>Alias rules have not yet been recorded.</p>
+    {% elif record.alias_rules.length === 0 %}
+    <p>No alias rules matched.</p>
+    {% else %}
+    <ol>
+        {% for rule in record.alias_rules %}
+        <li>{{rule.kind}} rule {{rule.rule}}: <code>{{rule.expression}}</code><br />
+            {{rule.before}} &rarr; {{rule.after}}</li>
+        {% endfor %}
+    </ol>
+    {% endif %}
+</article>
+{% else %}<p>No media discoveries on this page.</p>{% endfor %}
+<nav aria-label="Discovery pages">
+    {% if previous %}<a href="?page={{previous}}">Previous page</a>{% endif %}
+    Page {{page}}
+    {% if next %}<a href="?page={{next}}">Next page</a>{% endif %}
+</nav>
+{% endblock %}

@@ -1,6 +1,24 @@
-/node_modules
+**/node_modules
+**/build
 *.bak
-/config/default.yml
 /test_data
 /tmp
-.DS_Store
+**/.DS_Store
+
+# Server snapshot retained locally as the v2 import source
+/edited/
+# Local PostgreSQL runtime data
+/postgresdata/
+
+.pnpm-store/
+
+# Runtime database password; copy the example when setting up a new checkout.
+/configuration/postgres-password
+
+# Local environment files and default PostgreSQL bind directory.
+/.env
+/data/postgresql/
+
+# Deployment archives
+dist/
+.majorpodo-package-*/

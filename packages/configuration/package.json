@@ -1,0 +1,30 @@
+{
+    "name": "@majorpodo/configuration",
+    "version": "2.0.0",
+    "private": true,
+    "license": "GPL-2.0-only",
+    "files": [
+        "build",
+        "LICENSE"
+    ],
+    "main": "build/index.js",
+    "types": "build/index.d.ts",
+    "scripts": {
+        "build": "tsc",
+        "prepare": "pnpm run build",
+        "typecheck": "tsc --noEmit",
+        "lint": "oxlint --deny-warnings .",
+        "lint:fix": "oxlint --fix --deny-warnings .",
+        "format:check": "oxfmt --check .",
+        "format:fix": "oxfmt --write ."
+    },
+    "dependencies": {
+        "js-yaml": "^5.5.0",
+        "pg": "^8.23.1"
+    },
+    "devDependencies": {
+        "@types/node": "^24.19.2",
+        "@types/pg": "^8.23.1",
+        "typescript": "~5.9.3"
+    }
+}

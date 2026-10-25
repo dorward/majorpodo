@@ -1,0 +1,45 @@
+{
+    "name": "@majorpodo/scanner",
+    "version": "2.0.0",
+    "private": true,
+    "description": "Podcast scraper",
+    "license": "GPL-2.0-only",
+    "author": "David Dorward <david@dorward.me.uk>",
+    "files": [
+        "build",
+        "LICENSE"
+    ],
+    "scripts": {
+        "start:dev": "nodemon --watch index.ts --watch lib --watch jobs --ext ts --exec \"pnpm run build && node build/index.js\"",
+        "start:prod": "node build/index.js",
+        "build": "tsc",
+        "lint": "oxlint --deny-warnings .",
+        "format:check": "oxfmt --check .",
+        "format:fix": "oxfmt --write .",
+        "lint:fix": "oxlint --fix --deny-warnings .",
+        "typecheck": "tsc --noEmit && tsc -p tsconfig.test.json",
+        "test": "vitest run --root ../.. services/scanner/tests"
+    },
+    "dependencies": {
+        "@majorpodo/configuration": "workspace:*",
+        "bree": "^9.2.9",
+        "klaw": "^4.0.1",
+        "markdown-it": "^15.0.3",
+        "music-metadata": "^12.2.3",
+        "pg": "^8.23.1",
+        "winston": "^3.19.0"
+    },
+    "devDependencies": {
+        "@types/klaw": "^3.0.3",
+        "@types/node": "^24.19.2",
+        "@types/pg": "^8.23.1",
+        "nodemon": "^3.1.14",
+        "oxfmt": "^0.74.0",
+        "oxlint": "^1.89.0",
+        "ts-node": "^10.9.2",
+        "typescript": "~5.9.3"
+    },
+    "engines": {
+        "node": ">=24"
+    }
+}

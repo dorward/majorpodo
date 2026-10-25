@@ -1,0 +1,23 @@
+{% extends "base.html" %} {% set page_title = episodes[0].episode_title %} {% block content %} {% for episode in
+episodes %}
+
+<div class="head">
+	<p class="position">
+		Season {{episode.season_num}} Episode {{episode.episode_num}}<br />{{episode.date.toLocaleDateString()}}
+	</p>
+	{% if episode.is_video === false %}<audio controls src="{{episode.file_url | assetPath}}"></audio>{% endif %} {% if
+	episode.is_video === true %}<video controls src="{{episode.file_url | assetPath}}" poster="{{episode.image_url | assetPath}}"></video>{% endif
+	%}
+	<div>
+		<div class="icon">
+			<a href="../../">{% include "icons/arrow_back-black-18dp.svg" %}</a>
+		</div>
+		<div class="icon">
+			<a href="{{episode.file_url | assetPath}}" download>{% include "icons/cloud_download-black-18dp.svg" %}</a>
+		</div>
+	</div>
+</div>
+
+<div class="description">{{episode.episode_description | safe}}</div>
+
+{% if episode.image_url %}<img src="{{episode.image_url | assetPath}}" />{% endif %}{% endfor %} {% endblock %}

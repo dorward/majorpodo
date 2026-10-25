@@ -1,0 +1,272 @@
+{
+    "date": "2026-10-25",
+    "scanner": "Trivy 0.76.1",
+    "note": "Recorded findings, not an allowlist or exploitability assessment. Rerun scans for current results.",
+    "images": {
+        "http": {
+            "image": "production runtime image after removal of npm/Yarn",
+            "digests": [
+                "majorpodo-smoke-58060-http@sha256:27cfe9b2adf0bd0720f6f071a32ee7a29e563dc81109ab9bdee349accb0e5f6e"
+            ],
+            "highCriticalFindings": []
+        },
+        "scanner": {
+            "image": "production runtime image after removal of npm/Yarn",
+            "digests": [
+                "majorpodo-smoke-58060-scanner@sha256:0cb9e846e509df81f890a0cfaa78e6175ffaeb9a6b245e4bf4d44ddc68a5f8a4"
+            ],
+            "highCriticalFindings": []
+        },
+        "postgres": {
+            "image": "postgres:18.6-alpine",
+            "digests": [
+                "postgres@sha256:898c60cb390d1085bc97bdd6a1ae968757421df394b071848b52b1c09c89d6a5"
+            ],
+            "highCriticalFindings": [
+                {
+                    "id": "CVE-2026-111497",
+                    "severity": "HIGH",
+                    "component": "postgres:18.6-alpine (alpine 3.24.3)",
+                    "package": "brotli-libs",
+                    "installedVersion": "1.2.0-r1",
+                    "fixedVersion": "1.2.1-r0",
+                    "advisory": "https://avd.aquasec.com/nvd/cve-2026-111497"
+                },
+                {
+                    "id": "CVE-2025-68121",
+                    "severity": "CRITICAL",
+                    "component": "usr/local/bin/gosu",
+                    "package": "stdlib",
+                    "installedVersion": "v1.24.6",
+                    "fixedVersion": "1.24.13, 1.25.7, 1.26.0-rc.3",
+                    "advisory": "https://avd.aquasec.com/nvd/cve-2025-68121"
+                },
+                {
+                    "id": "CVE-2025-61726",
+                    "severity": "HIGH",
+                    "component": "usr/local/bin/gosu",
+                    "package": "stdlib",
+                    "installedVersion": "v1.24.6",
+                    "fixedVersion": "1.24.12, 1.25.6",
+                    "advisory": "https://avd.aquasec.com/nvd/cve-2025-61726"
+                },
+                {
+                    "id": "CVE-2025-61729",
+                    "severity": "HIGH",
+                    "component": "usr/local/bin/gosu",
+                    "package": "stdlib",
+                    "installedVersion": "v1.24.6",
+                    "fixedVersion": "1.24.11, 1.25.5",
+                    "advisory": "https://avd.aquasec.com/nvd/cve-2025-61729"
+                },
+                {
+                    "id": "CVE-2026-111943",
+                    "severity": "HIGH",
+                    "component": "usr/local/bin/gosu",
+                    "package": "stdlib",
+                    "installedVersion": "v1.24.6",
+                    "fixedVersion": "1.26.10, 1.27.3",
+                    "advisory": "https://avd.aquasec.com/nvd/cve-2026-111943"
+                },
+                {
+                    "id": "CVE-2026-25679",
+                    "severity": "HIGH",
+                    "component": "usr/local/bin/gosu",
+                    "package": "stdlib",
+                    "installedVersion": "v1.24.6",
+                    "fixedVersion": "1.25.8, 1.26.1",
+                    "advisory": "https://avd.aquasec.com/nvd/cve-2026-25679"
+                },
+                {
+                    "id": "CVE-2026-27145",
+                    "severity": "HIGH",
+                    "component": "usr/local/bin/gosu",
+                    "package": "stdlib",
+                    "installedVersion": "v1.24.6",
+                    "fixedVersion": "1.25.11, 1.26.4",
+                    "advisory": "https://avd.aquasec.com/nvd/cve-2026-27145"
+                },
+                {
+                    "id": "CVE-2026-32280",
+                    "severity": "HIGH",
+                    "component": "usr/local/bin/gosu",
+                    "package": "stdlib",
+                    "installedVersion": "v1.24.6",
+                    "fixedVersion": "1.25.9, 1.26.2",
+                    "advisory": "https://avd.aquasec.com/nvd/cve-2026-32280"
+                },
+                {
+                    "id": "CVE-2026-32281",
+                    "severity": "HIGH",
+                    "component": "usr/local/bin/gosu",
+                    "package": "stdlib",
+                    "installedVersion": "v1.24.6",
+                    "fixedVersion": "1.25.9, 1.26.2",
+                    "advisory": "https://avd.aquasec.com/nvd/cve-2026-32281"
+                },
+                {
+                    "id": "CVE-2026-32283",
+                    "severity": "HIGH",
+                    "component": "usr/local/bin/gosu",
+                    "package": "stdlib",
+                    "installedVersion": "v1.24.6",
+                    "fixedVersion": "1.25.9, 1.26.2",
+                    "advisory": "https://avd.aquasec.com/nvd/cve-2026-32283"
+                },
+                {
+                    "id": "CVE-2026-33811",
+                    "severity": "HIGH",
+                    "component": "usr/local/bin/gosu",
+                    "package": "stdlib",
+                    "installedVersion": "v1.24.6",
+                    "fixedVersion": "1.25.10, 1.26.3",
+                    "advisory": "https://avd.aquasec.com/nvd/cve-2026-33811"
+                },
+                {
+                    "id": "CVE-2026-33814",
+                    "severity": "HIGH",
+                    "component": "usr/local/bin/gosu",
+                    "package": "stdlib",
+                    "installedVersion": "v1.24.6",
+                    "fixedVersion": "1.25.10, 1.26.3",
+                    "advisory": "https://avd.aquasec.com/nvd/cve-2026-33814"
+                },
+                {
+                    "id": "CVE-2026-33818",
+                    "severity": "HIGH",
+                    "component": "usr/local/bin/gosu",
+                    "package": "stdlib",
+                    "installedVersion": "v1.24.6",
+                    "fixedVersion": "1.25.13, 1.26.6, 1.27.0-rc.3",
+                    "advisory": "https://avd.aquasec.com/nvd/cve-2026-33818"
+                },
+                {
+                    "id": "CVE-2026-39820",
+                    "severity": "HIGH",
+                    "component": "usr/local/bin/gosu",
+                    "package": "stdlib",
+                    "installedVersion": "v1.24.6",
+                    "fixedVersion": "1.25.10, 1.26.3",
+                    "advisory": "https://avd.aquasec.com/nvd/cve-2026-39820"
+                },
+                {
+                    "id": "CVE-2026-39821",
+                    "severity": "HIGH",
+                    "component": "usr/local/bin/gosu",
+                    "package": "stdlib",
+                    "installedVersion": "v1.24.6",
+                    "fixedVersion": "1.25.13, 1.26.6, 1.27.0-rc.3",
+                    "advisory": "https://avd.aquasec.com/nvd/cve-2026-39821"
+                },
+                {
+                    "id": "CVE-2026-39822",
+                    "severity": "HIGH",
+                    "component": "usr/local/bin/gosu",
+                    "package": "stdlib",
+                    "installedVersion": "v1.24.6",
+                    "fixedVersion": "1.25.12, 1.26.5, 1.27.0-rc.2",
+                    "advisory": "https://avd.aquasec.com/nvd/cve-2026-39822"
+                },
+                {
+                    "id": "CVE-2026-39836",
+                    "severity": "HIGH",
+                    "component": "usr/local/bin/gosu",
+                    "package": "stdlib",
+                    "installedVersion": "v1.24.6",
+                    "fixedVersion": "1.25.10, 1.26.3",
+                    "advisory": "https://avd.aquasec.com/nvd/cve-2026-39836"
+                },
+                {
+                    "id": "CVE-2026-42499",
+                    "severity": "HIGH",
+                    "component": "usr/local/bin/gosu",
+                    "package": "stdlib",
+                    "installedVersion": "v1.24.6",
+                    "fixedVersion": "1.25.10, 1.26.3",
+                    "advisory": "https://avd.aquasec.com/nvd/cve-2026-42499"
+                },
+                {
+                    "id": "CVE-2026-42504",
+                    "severity": "HIGH",
+                    "component": "usr/local/bin/gosu",
+                    "package": "stdlib",
+                    "installedVersion": "v1.24.6",
+                    "fixedVersion": "1.25.11, 1.26.4",
+                    "advisory": "https://avd.aquasec.com/nvd/cve-2026-42504"
+                },
+                {
+                    "id": "CVE-2026-56853",
+                    "severity": "HIGH",
+                    "component": "usr/local/bin/gosu",
+                    "package": "stdlib",
+                    "installedVersion": "v1.24.6",
+                    "fixedVersion": "1.25.13, 1.26.6, 1.27.0-rc.3",
+                    "advisory": "https://avd.aquasec.com/nvd/cve-2026-56853"
+                },
+                {
+                    "id": "CVE-2026-56858",
+                    "severity": "HIGH",
+                    "component": "usr/local/bin/gosu",
+                    "package": "stdlib",
+                    "installedVersion": "v1.24.6",
+                    "fixedVersion": "1.25.13, 1.26.6, 1.27.0-rc.3",
+                    "advisory": "https://avd.aquasec.com/nvd/cve-2026-56858"
+                },
+                {
+                    "id": "CVE-2026-56859",
+                    "severity": "HIGH",
+                    "component": "usr/local/bin/gosu",
+                    "package": "stdlib",
+                    "installedVersion": "v1.24.6",
+                    "fixedVersion": "1.25.13, 1.26.6, 1.27.0-rc.3",
+                    "advisory": "https://avd.aquasec.com/nvd/cve-2026-56859"
+                },
+                {
+                    "id": "CVE-2026-56860",
+                    "severity": "HIGH",
+                    "component": "usr/local/bin/gosu",
+                    "package": "stdlib",
+                    "installedVersion": "v1.24.6",
+                    "fixedVersion": "1.25.13, 1.26.6, 1.27.0-rc.3",
+                    "advisory": "https://avd.aquasec.com/nvd/cve-2026-56860"
+                },
+                {
+                    "id": "CVE-2026-56862",
+                    "severity": "HIGH",
+                    "component": "usr/local/bin/gosu",
+                    "package": "stdlib",
+                    "installedVersion": "v1.24.6",
+                    "fixedVersion": "1.25.13, 1.26.6, 1.27.0-rc.3",
+                    "advisory": "https://avd.aquasec.com/nvd/cve-2026-56862"
+                },
+                {
+                    "id": "CVE-2026-78667",
+                    "severity": "HIGH",
+                    "component": "usr/local/bin/gosu",
+                    "package": "stdlib",
+                    "installedVersion": "v1.24.6",
+                    "fixedVersion": "1.26.9, 1.27.2",
+                    "advisory": "https://avd.aquasec.com/nvd/cve-2026-78667"
+                },
+                {
+                    "id": "CVE-2026-78669",
+                    "severity": "HIGH",
+                    "component": "usr/local/bin/gosu",
+                    "package": "stdlib",
+                    "installedVersion": "v1.24.6",
+                    "fixedVersion": "1.26.9, 1.27.2",
+                    "advisory": "https://avd.aquasec.com/nvd/cve-2026-78669"
+                },
+                {
+                    "id": "CVE-2026-97031",
+                    "severity": "HIGH",
+                    "component": "usr/local/bin/gosu",
+                    "package": "stdlib",
+                    "installedVersion": "v1.24.6",
+                    "fixedVersion": "1.26.9, 1.27.2",
+                    "advisory": "https://avd.aquasec.com/nvd/cve-2026-97031"
+                }
+            ]
+        }
+    }
+}

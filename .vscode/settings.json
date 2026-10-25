@@ -1,14 +1,30 @@
 {
     "cSpell.words": [
-        "Earthsearch",
-        "Hitchhiker's",
-        "Majorpodo",
         "autoescape",
+        "behavior",
+        "codepaths",
+        "dhparams",
+        "Dorward",
+        "Earthsearch",
+        "fullchain",
+        "Hitchhiker's",
+        "htpasswd",
         "httplogger",
         "iplayer",
         "klaw",
+        "letsencrypt",
+        "Majorpodo",
         "maxsize",
+        "Millis",
+        "pauleliet",
         "preconnect",
-        "vars"
-    ]
+        "privkey",
+        "tsbuildinfo",
+        "vars",
+        "videocam"
+    ],
+    "[typescript]": {
+        "editor.defaultFormatter": "oxc.oxc-vscode",
+        "editor.formatOnSave": true
+    }
 }

@@ -1,0 +1,62 @@
+services:
+  majorpodo-http:
+    container_name: majorpodo-http
+    build:
+      context: .
+      dockerfile: services/http/Dockerfile
+    ports:
+      - target: 3000
+        published: 3000
+        host_ip: 127.0.0.1
+    depends_on:
+      majorpodo-postgres:
+        condition: service_healthy
+    volumes:
+      - ./configuration:/configuration:ro
+      - /var/media/get_iplayer/:/var/media/get_iplayer/
+      - /var/media/cached_majorpodo_images/:/var/media/images/
+    environment:
+      MAJORPODO_CONFIGURATION_DIR: /configuration
+
+    restart: unless-stopped
+
+  majorpodo-scanner:
+    container_name: majorpodo-scanner
+    build:
+      context: .
+      dockerfile: services/scanner/Dockerfile
+    depends_on:
+      majorpodo-postgres:
+        condition: service_healthy
+    volumes:
+      - ./configuration:/configuration:ro
+      - /var/media/get_iplayer/:/var/media/get_iplayer/
+      - /var/media/cached_majorpodo_images/:/var/media/images/
+    environment:
+      MAJORPODO_CONFIGURATION_DIR: /configuration
+
+    restart: unless-stopped
+
+  majorpodo-postgres:
+    container_name: majorpodo-postgres
+    image: postgres:18.6-alpine
+    volumes:
+      - ./configuration:/configuration:ro
+      - type: bind
+        source: '${MAJORPODO_COMPOSE_POSTGRES_DATA_DIR:?Use ./run.sh to load deployment.postgresDataDirectory from configuration/default.yml}'
+        target: /var/lib/postgresql
+      - ./services/postgresql/docker_postgres_init.sql:/docker-entrypoint-initdb.d/docker_postgres_init.sql
+    restart: unless-stopped
+    healthcheck:
+      # TCP stays closed during the image's temporary init-only PostgreSQL server.
+      test:
+        - CMD-SHELL
+        - 'pg_isready -h 127.0.0.1 -U "$$(cat "$$POSTGRES_USER_FILE")" -d "$$(cat "$$POSTGRES_DB_FILE")"'
+      interval: 5s
+      timeout: 3s
+      retries: 12
+      start_period: 10s
+    environment:
+      POSTGRES_USER_FILE: /configuration/postgres-user
+      POSTGRES_PASSWORD_FILE: /configuration/postgres-password
+      POSTGRES_DB_FILE: /configuration/postgres-database

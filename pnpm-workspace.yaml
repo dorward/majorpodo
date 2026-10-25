@@ -1,0 +1,9 @@
+packages:
+  - services/http
+  - services/scanner
+  - packages/*
+
+# These optional lifecycle scripts are not needed to build or run either service.
+allowBuilds:
+  fsevents: false
+  nodemon: false

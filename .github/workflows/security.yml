@@ -1,0 +1,95 @@
+name: Security
+on:
+    push:
+        branches: [master]
+    pull_request:
+    schedule:
+        - cron: '23 6 * * 1'
+    workflow_dispatch:
+permissions:
+    contents: read
+concurrency:
+    group: security-${{ github.ref }}
+    cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+jobs:
+    codeql:
+        name: CodeQL
+        runs-on: ubuntu-24.04
+        timeout-minutes: 20
+        permissions:
+            contents: read
+            security-events: write
+        steps:
+            - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+              with:
+                  persist-credentials: false
+            - uses: github/codeql-action/init@9b3254085494b55a0f7c4c2b3d2d52cc712ce370 # v4
+              with:
+                  languages: javascript-typescript
+                  build-mode: none
+                  queries: security-extended
+            - uses: github/codeql-action/analyze@9b3254085494b55a0f7c4c2b3d2d52cc712ce370 # v4
+              with:
+                  category: /language:javascript-typescript
+    audit:
+        name: Weekly dependency audit
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        runs-on: ubuntu-24.04
+        timeout-minutes: 10
+        steps:
+            - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+              with:
+                  persist-credentials: false
+            - uses: ./.github/actions/setup
+            - run: pnpm audit --audit-level high
+            - if: always()
+              run: pnpm audit --prod --audit-level high
+    containers:
+        name: Container scan (${{ matrix.service }})
+        runs-on: ubuntu-24.04
+        timeout-minutes: 25
+        permissions:
+            contents: read
+            security-events: write
+        strategy:
+            fail-fast: false
+            matrix:
+                service: [http, scanner, postgres]
+        steps:
+            - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+              with:
+                  persist-credentials: false
+            - name: Build or pull the runtime image
+              env:
+                  SERVICE: ${{ matrix.service }}
+              run: |
+                  if [ "$SERVICE" = postgres ]; then
+                    image=$(sed -n 's/^    image: //p' docker-compose.yml)
+                    docker pull "$image"
+                    docker tag "$image" majorpodo-scan:postgres
+                  else
+                    docker build --tag "majorpodo-scan:$SERVICE" --file "services/$SERVICE/Dockerfile" .
+                  fi
+            - name: Scan OS and runtime packages
+              uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
+              with:
+                  version: v0.76.1
+                  image-ref: majorpodo-scan:${{ matrix.service }}
+                  format: sarif
+                  output: trivy-${{ matrix.service }}.sarif
+                  severity: HIGH,CRITICAL
+                  exit-code: '1'
+                  ignore-unfixed: false
+            - name: Upload scan results
+              if: always() && hashFiles(format('trivy-{0}.sarif', matrix.service)) != '' && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
+              uses: github/codeql-action/upload-sarif@9b3254085494b55a0f7c4c2b3d2d52cc712ce370 # v4
+              with:
+                  sarif_file: trivy-${{ matrix.service }}.sarif
+                  category: container-${{ matrix.service }}
+            - name: Keep scan reports
+              if: always()
+              uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+              with:
+                  name: trivy-${{ matrix.service }}
+                  path: trivy-${{ matrix.service }}.sarif
+                  retention-days: 7

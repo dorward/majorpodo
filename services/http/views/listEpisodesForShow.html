@@ -1,0 +1,29 @@
+{% extends "base.html" %} {% set page_title = title + " Podcast" %} {% set rss = true %} {%
+block content %}
+
+<ul class="episodes">
+    {% for episode in episodes %}
+    <li>
+        <h3 class="title">
+            <a href="/{{title | urlencode }}/episode/{{episode.id}}"
+                >{{episode.episode_title}}</a
+            >
+        </h3>
+
+        <div class="head">
+            <p class="position">
+                Season {{episode.season_num}} Episode {{episode.episode_num}}<br />{{episode.date.toLocaleDateString()}}
+            </p>
+            <div class="icon">
+                <a href="{{episode.file_url | assetPath}}" download
+                    >{% include "icons/cloud_download-black-18dp.svg" %}</a
+                >
+            </div>
+        </div>
+
+        {% if episode.image_url %}<img src="{{episode.image_url | assetPath}}" alt="" />{% endif %}
+    </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

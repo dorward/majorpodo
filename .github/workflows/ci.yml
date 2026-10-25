@@ -1,0 +1,65 @@
+name: CI
+on:
+    push:
+        branches: [master]
+    pull_request:
+    workflow_dispatch:
+    workflow_call:
+permissions:
+    contents: read
+concurrency:
+    group: ci-${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+jobs:
+    checks:
+        name: Checks
+        runs-on: ubuntu-24.04
+        timeout-minutes: 15
+        steps:
+            - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+              with:
+                  persist-credentials: false
+            - uses: ./.github/actions/setup
+            - run: pnpm test
+            - run: pnpm typecheck
+            - run: pnpm lint
+            - run: pnpm format:check
+            - run: pnpm build
+            - name: Validate deployment archive
+              run: pnpm test:package
+    docker-smoke:
+        name: Docker smoke
+        runs-on: ubuntu-24.04
+        timeout-minutes: 25
+        steps:
+            - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+              with:
+                  persist-credentials: false
+            - uses: ./.github/actions/setup
+            - run: pnpm test:docker
+    audit:
+        name: Dependency audit
+        runs-on: ubuntu-24.04
+        timeout-minutes: 10
+        steps:
+            - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+              with:
+                  persist-credentials: false
+            - uses: ./.github/actions/setup
+            - name: Audit all dependencies
+              run: pnpm audit --audit-level high
+            - name: Audit production dependencies
+              if: always()
+              run: pnpm audit --prod --audit-level high
+    dependency-review:
+        name: Dependency review
+        if: github.event_name == 'pull_request'
+        runs-on: ubuntu-24.04
+        timeout-minutes: 10
+        steps:
+            - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+              with:
+                  persist-credentials: false
+            - uses: actions/dependency-review-action@a1d282b36b6f3519aa1f3fc636f609c47dddb294 # v5.0.0
+              with:
+                  fail-on-severity: high

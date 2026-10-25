@@ -1,0 +1,47 @@
+{
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": ["config:recommended", "helpers:pinGitHubActionDigests", "docker:pinDigests"],
+    "timezone": "Europe/London",
+    "schedule": ["before 7am on monday"],
+    "automerge": false,
+    "prConcurrentLimit": 4,
+    "prHourlyLimit": 2,
+    "dependencyDashboard": true,
+    "lockFileMaintenance": {
+        "enabled": true
+    },
+    "packageRules": [
+        {
+            "matchUpdateTypes": ["minor", "patch", "digest", "pin", "pinDigest"],
+            "groupName": "non-major dependencies"
+        },
+        {
+            "matchUpdateTypes": ["major"],
+            "dependencyDashboardApproval": true
+        },
+        {
+            "matchDatasources": ["docker"],
+            "matchPackageNames": ["postgres"],
+            "matchUpdateTypes": ["major"],
+            "dependencyDashboardApproval": true,
+            "prBodyNotes": [
+                "PostgreSQL major upgrades require an explicit storage/schema migration plan and a successful disposable-database smoke test."
+            ]
+        }
+    ],
+    "customManagers": [
+        {
+            "customType": "regex",
+            "managerFilePatterns": ["/^services\\/(http|scanner)\\/Dockerfile$/"],
+            "matchStrings": ["npm install --global (?<depName>pnpm)@(?<currentValue>[0-9.]+)"],
+            "datasourceTemplate": "npm"
+        },
+        {
+            "customType": "regex",
+            "managerFilePatterns": ["/^\\.github\\/workflows\\/security\\.yml$/"],
+            "matchStrings": ["version: (?<currentValue>v[0-9.]+)"],
+            "depNameTemplate": "aquasecurity/trivy",
+            "datasourceTemplate": "github-releases"
+        }
+    ]
+}

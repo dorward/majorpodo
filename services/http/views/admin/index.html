@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% set page_title = "Administration" %}
+{% block content %}
+<p><a href="/">Podcast catalogue</a></p>
+<ul>
+    {% for page in pages %}<li><a href="{{page.url}}">{{page.title}}</a></li>{% endfor %}
+</ul>
+{% endblock %}

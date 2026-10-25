@@ -1,0 +1,26 @@
+{% extends "base.html" %} {% set page_title = "Majorpodo" %} {% block content %}
+<ul class="episodes">
+    {% for data in shows %}
+    <li>
+        <h2 class="title">
+            <div class="icon prefix">
+                {% if data.is_video > 0 %} {% include "icons/videocam-black-18dp.svg" %} {% else
+                %} {% include "icons/headset-black-18dp.svg" %} {% endif %}
+            </div>
+            <a href="/{{data.series_title | urlencode}}">{{data.series_title}}</a>
+        </h2>
+
+        <div class="head">
+            <p class="position">{{data.episode_count}} episodes</p>
+            <div class="icon">
+                <a href="/{{data.series_title | urlencode}}/rss"
+                    >{% include "icons/rss_feed-black-18dp.svg" %}</a
+                >
+            </div>
+        </div>
+
+        {% if data.image %}<img src="{{data.image | assetPath}}" alt="" />{% endif %}
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

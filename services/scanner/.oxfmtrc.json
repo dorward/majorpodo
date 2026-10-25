@@ -1,0 +1,16 @@
+{
+    "$schema": "./node_modules/oxfmt/configuration_schema.json",
+    "printWidth": 96,
+    "tabWidth": 4,
+    "singleQuote": true,
+    "semi": true,
+    "trailingComma": "all",
+    "ignorePatterns": [
+        "build/**",
+        "node_modules/**",
+        "package-lock.json",
+        "static/style.css",
+        "static/style.css.map",
+        "views/**"
+    ]
+}
