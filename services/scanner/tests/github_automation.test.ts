@@ -21,6 +21,12 @@ if (args[0] === 'repo') { console.log(JSON.stringify({nameWithOwner:'test/majorp
 const method = args[2], route = args[3];
 const text = fs.readFileSync(0, 'utf8');
 fs.appendFileSync(process.env.CALL_LOG, JSON.stringify({method, route, body: text ? JSON.parse(text) : null})+'\\n');
+// GitHub accepts either legacy contexts or app-bound checks, never both.
+const body = text ? JSON.parse(text) : null;
+const status = body?.required_status_checks ?? body;
+if (status && Object.hasOwn(status, 'contexts') && Object.hasOwn(status, 'checks')) {
+  console.error('HTTP 422: contexts and checks are mutually exclusive'); process.exit(1);
+}
 const scenario = process.env.SCENARIO;
 const missing = () => { console.error('HTTP 404'); process.exit(1); };
 let result = {};
@@ -77,6 +83,7 @@ test('initial protection requires the CI/security jobs from GitHub Actions witho
     const policy = result.calls.find(
         (call) => call.method === 'PUT' && call.route.endsWith('/protection'),
     );
+    expect(policy?.body?.required_status_checks).not.toHaveProperty('contexts');
     expect(policy?.body).toMatchObject({
         required_status_checks: {
             strict: true,
@@ -105,6 +112,7 @@ test('updating existing protection preserves review/admin restrictions and unrel
             checks: expect.arrayContaining([{ context: 'Existing check', app_id: 123 }]),
         },
     });
+    expect(writes[0].body).not.toHaveProperty('contexts');
     expect(writes[0].body).not.toHaveProperty('enforce_admins');
     expect(writes[0].body).not.toHaveProperty('required_pull_request_reviews');
 });
