@@ -39,7 +39,7 @@
         "@types/pg": "^8.23.1",
         "@types/supertest": "^7.2.1",
         "nodemon": "^3.1.14",
-        "oxfmt": "^0.74.0",
+        "oxfmt": "^0.75.0",
         "oxlint": "^1.89.0",
         "supertest": "^7.3.1",
         "ts-node": "^10.9.2",
