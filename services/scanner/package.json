@@ -34,7 +34,7 @@
         "@types/node": "^24.19.2",
         "@types/pg": "^8.23.1",
         "nodemon": "^3.1.14",
-        "oxfmt": "^0.74.0",
+        "oxfmt": "^0.75.0",
         "oxlint": "^1.89.0",
         "ts-node": "^10.9.2",
         "typescript": "~5.9.3"
