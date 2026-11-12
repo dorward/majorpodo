@@ -39,7 +39,7 @@ services:
 
   majorpodo-postgres:
     container_name: majorpodo-postgres
-    image: postgres:18.6-alpine
+    image: postgres:18.7-alpine@sha256:75dcac3dfb1cd01ca3536910bbc84128759362f8b118bf8c55b38a94f68f3b73
     volumes:
       - ./configuration:/configuration:ro
       - type: bind
